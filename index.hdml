@@ -2,184 +2,321 @@
 <html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>سایت مهزیار</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>مهزیار | ربات روبیکا</title>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            background-color: white;
-            font-family: 'Tahoma', sans-serif;
-            color: #333;
+        :root {
+            --primary: #007bff;
+            --success: #28a745;
+            --dark: #1a1a1a;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+            --radius: 16px;
+            --shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        * {
             margin: 0;
             padding: 0;
-            line-height: 1.6;
-            text-align: center;
+            box-sizing: border-box;
         }
-        header {
-            background-color: #4CAF50;
-            color: white;
-            padding: 40px 20px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            animation: fadeIn 1s ease-in-out;
+
+        body {
+            background: white;
+            font-family: 'Vazirmatn', Tahoma, sans-serif;
+            color: var(--dark);
+            line-height: 1.7;
+            padding: env(safe-area-inset-top, 20px) env(safe-area-inset-right, 16px) env(safe-area-inset-bottom, 20px) env(safe-area-inset-left, 16px);
+            padding-bottom: calc(20px + env(safe-area-inset-bottom));
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
-        h1 {
-            margin: 0;
-            font-size: 2.5em;
-        }
-        .intro {
-            font-size: 1.2em;
-            margin: 20px 0;
-        }
+
         .container {
-            max-width: 1200px;
+            flex: 1;
+            max-width: 480px;
             margin: 0 auto;
+            width: 100%;
+            padding: 0 16px;
+        }
+
+        /* هدر با گرادیان و افکت گلس */
+        header {
+            background: linear-gradient(135deg, #007bff, #00c6ff);
+            color: white;
+            text-align: center;
+            padding: 32px 20px;
+            border-radius: 0 0 24px 24px;
+            box-shadow: var(--shadow);
+            margin-bottom: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: inherit;
+            pointer-events: none;
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .bot-id {
+            font-size: 1rem;
+            font-weight: 500;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* بخش‌ها */
+        section {
+            background: var(--light);
+            border-radius: var(--radius);
             padding: 20px;
-        }
-        .links-section {
-            background-color: #f9f9f9;
-            border-radius: 10px;
-            padding: 30px;
-            margin: 20px auto;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            max-width: 800px;
-        }
-        .links-section h2 {
-            color: #4CAF50;
-            font-size: 1.8em;
             margin-bottom: 20px;
+            box-shadow: var(--shadow);
+            border: 1px solid #e9ecef;
         }
-        .links-section p {
-            font-size: 1.1em;
-            margin: 10px 0;
+
+        h2 {
+            font-size: 1.25rem;
+            color: var(--primary);
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e3f2fd;
+            font-weight: 600;
         }
+
+        ul {
+            list-style: none;
+        }
+
+        li {
+            background: white;
+            padding: 12px 16px;
+            margin: 8px 0;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        li:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
         a {
-            color: #2196F3;
+            color: var(--primary);
             text-decoration: none;
-            font-weight: bold;
+            font-weight: 600;
+            word-break: break-all;
         }
+
         a:hover {
             text-decoration: underline;
         }
-        .button {
-            background-color: #2196F3;
+
+        /* دکمه دستورات */
+        .cmd-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: var(--success);
             color: white;
-            border: none;
-            padding: 15px 30px;
-            font-size: 1.2em;
-            border-radius: 5px;
-            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 14px 20px;
+            border-radius: 14px;
             margin: 20px 0;
-            transition: background-color 0.3s, transform 0.3s;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(40,167,69,0.3);
+            transition: all 0.3s ease;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
         }
-        .button:hover {
-            background-color: #1976D2;
-            transform: scale(1.05);
+
+        .cmd-btn:active {
+            transform: scale(0.96);
+            box-shadow: 0 2px 6px rgba(40,167,69,0.2);
         }
+
+        .cmd-btn .icon {
+            font-size: 1.3em;
+            transition: transform 0.3s ease;
+        }
+
+        .cmd-btn.open .icon {
+            transform: rotate(180deg);
+        }
+
+        /* لیست دستورات */
         .commands {
-            display: none;
-            background-color: #fff;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            padding: 20px;
-            margin: 20px auto;
-            max-width: 800px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            animation: slideDown 0.5s ease-in-out;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+            padding: 0 4px;
         }
-        .commands.show {
-            display: block;
+
+        .commands.open {
+            max-height: 1200px;
+            padding: 16px 4px;
         }
-        .commands h3 {
-            color: #FF5722;
-            margin-bottom: 15px;
+
+        .cmd-group {
+            margin-bottom: 20px;
         }
-        .commands ul {
-            list-style-type: none;
-            padding: 0;
+
+        .cmd-group h3 {
+            font-size: 1.1rem;
+            color: #e91e63;
+            margin: 16px 0 12px;
+            font-weight: 600;
+            padding-right: 8px;
         }
-        .commands li {
-            background-color: #f0f0f0;
-            margin: 10px 0;
-            padding: 10px;
-            border-radius: 5px;
-        }
+
+        /* فوتر */
         footer {
-            background-color: #333;
-            color: white;
+            text-align: center;
             padding: 20px;
-            margin-top: 40px;
-            font-size: 0.9em;
+            background: linear-gradient(135deg, #007bff, #00c6ff);
+            color: white;
+            border-radius: 20px 20px 0 0;
+            font-size: 0.9rem;
+            margin-top: auto;
+            box-shadow: 0 -4px 12px rgba(0,0,0,0.1);
         }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+
+        footer a {
+            color: #fff;
+            text-decoration: underline;
         }
-        @keyframes slideDown {
-            from { transform: translateY(-20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+
+        /* انیمیشن ورود */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        section, .cmd-btn {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        /* ریسپانسیو کامل */
+        @media (max-width: 480px) {
+            header {
+                padding: 28px 16px;
+                border-radius: 0 0 20px 20px;
+            }
+            header h1 {
+                font-size: 1.6rem;
+            }
+            .container {
+                padding: 0 12px;
+            }
         }
     </style>
 </head>
 <body>
     <header>
         <h1>به سایت مهزیار خوش آمدید</h1>
-        <p class="intro">بات روبیکا ی ما: @kshskhsBot</p>
+        <p class="bot-id">بات روبیکا ما: @kshskhsBot</p>
     </header>
 
     <div class="container">
-        <section class="links-section">
-            <h2>🚀 ربات مهزیار | قوی‌ترین ربات مدیریت و سرگرمی روبیکا 🚀</h2>
-            <p>🔥 با مهزیار بات، گروهت همیشه منظم، فعال و پرانرژی می‌مونه! 🔥</p>
-            <p>💬 ارتباط با پشتیبانی: <a href="https://rubika.ir/hufuguo">@hufuguo</a></p>
-            <p>🎮 آیدی بات: <a href="https://rubika.ir/kshskhsBot">@kshskhsBot</a></p>
-            <p>💻 کانال: <a href="https://rubika.ir/JadeText">@JadeText</a></p>
-            <p>🌐 گروه: <a href="https://rubika.ir/joing/JABBBBIC0YOSWJWDKLBNMGRJEVVMYTGQ">https://rubika.ir/joing/JABBBBIC0YOSWJWDKLBNMGRJEVVMYTGQ</a></p>
+        <section>
+            <h2>🚀 ربات مهزیار | قوی‌ترین ربات روبیکا 🚀</h2>
+            <p style="font-size:1rem; color:#d32f2f; font-weight:600;">🔥 گروهت همیشه منظم، فعال و پرانرژی می‌مونه! 🔥</p>
+            <ul>
+                <li>💬 پشتیبانی: <a href="https://rubika.ir/hufuguo">@hufuguo</a></li>
+                <li>🎮 آیدی بات: <a href="https://rubika.ir/kshskhsBot">@kshskhsBot</a></li>
+                <li>💻 کانال: <a href="https://rubika.ir/JadeText">@JadeText</a></li>
+                <li>🌐 گروه: <a href="https://rubika.ir/joing/JABBBBIC0YOSWJWDKLBNMGRJEVVMYTGQ">جوین گروه</a></li>
+            </ul>
         </section>
 
-        <button class="button" onclick="toggleCommands()">دستورات بات</button>
+        <div class="cmd-btn" onclick="toggleCommands(this)">
+            <span class="icon">↓</span>
+            <span>دستورات بات</span>
+        </div>
 
         <div id="commands" class="commands">
-            <h3>دستورات مدیریتی (فقط ادمین):</h3>
-            <ul>
-                <li>• تنظیم ادمین</li>
-                <li>• حذف ادمین</li>
-                <li>• قفل &lt;نام&gt; / باز &lt;نام&gt;</li>
-                <li>• سخنگو روشن / سخنگو خاموش</li>
-                <li>• وضعیت</li>
-            </ul>
+            <div class="cmd-group">
+                <h3>🛡️ دستورات مدیریتی (فقط ادمین)</h3>
+                <ul>
+                    <li>• تنظیم ادمین</li>
+                    <li>• حذف ادمین</li>
+                    <li>• قفل &lt;نام&gt; / باز &lt;نام&gt;</li>
+                    <li>• سخنگو روشن / سخنگو خاموش</li>
+                    <li>• وضعیت</li>
+                </ul>
+            </div>
 
-            <h3>دستورات سرگرمی و کاربردی:</h3>
-            <ul>
-                <li>• جوک</li>
-                <li>• دانستنی</li>
-                <li>• داستان</li>
-                <li>• چیستان</li>
-                <li>• انگیزشی</li>
-                <li>• بیوگرافی &lt;نام&gt;</li>
-                <li>• ویکی &lt;موضوع&gt;</li>
-                <li>• فال حافظ</li>
-                <li>• فونت &lt;متن&gt;</li>
-                <li>• بگو &lt;متن&gt;</li>
-                <li>• تنظیم اصل</li>
-                <li>• اصلش</li>
-                <li>• اطلاعات</li>
-                <li>• چالش</li>
-                <li>• ضد لینک اتومات فعاله</li>
-                <li>• تاس</li>
-                <li>• سکه</li>
-                <li>• ورژن</li>
-            </ul>
+            <div class="cmd-group">
+                <h3>🎉 دستورات سرگرمی و کاربردی</h3>
+                <ul>
+                    <li>• جوک</li>
+                    <li>• دانستنی</li>
+                    <li>• داستان</li>
+                    <li>• چیستان</li>
+                    <li>• انگیزشی</li>
+                    <li>• بیوگرافی &lt;نام&gt;</li>
+                    <li>• ویکی &lt;موضوع&gt;</li>
+                    <li>• فال حافظ</li>
+                    <li>• فونت &lt;متن&gt;</li>
+                    <li>• بگو &lt;متن&gt;</li>
+                    <li>• تنظیم اصل</li>
+                    <li>• اصلش</li>
+                    <li>• اطلاعات</li>
+                    <li>• چالش</li>
+                    <li>• ضد لینک اتومات فعاله</li>
+                    <li>• تاس</li>
+                    <li>• سکه</li>
+                    <li>• ورژن</li>
+                </ul>
+            </div>
         </div>
     </div>
 
     <footer>
-        <p>تیم طراحی و توسعه سایت و تیم کدنویسی: سعدی اسفندیار <a href="https://rubika.ir/harry_potter_head">rubika.ir/harry_potter_head</a></p>
+        <p>تیم طراحی و توسعه: <strong>سعدی اسفندیار</strong></p>
+        <a href="https://web.rubika.ir/#c=u0DOvsY0a1513c70c6aa77fce9bb3212">تماس با توسعه‌دهنده</a>
     </footer>
 
     <script>
-        function toggleCommands() {
-            var commands = document.getElementById('commands');
-            commands.classList.toggle('show');
+        function toggleCommands(btn) {
+            const commands = document.getElementById('commands');
+            const icon = btn.querySelector('.icon');
+            
+            commands.classList.toggle('open');
+            btn.classList.toggle('open');
+            
+            icon.textContent = commands.classList.contains('open') ? '↑' : '↓';
         }
+
+        // انیمیشن ورود تدریجی
+        document.addEventListener("DOMContentLoaded", () => {
+            document.querySelectorAll('section, .cmd-btn').forEach((el, i) => {
+                el.style.animationDelay = `${i * 0.1}s`;
+            });
+        });
     </script>
 </body>
 </html>
